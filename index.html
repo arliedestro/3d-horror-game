@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echoes of the Ledger</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <div id="title-screen">
+    <canvas id="title-bg"></canvas>
+    <div id="title-content">
+      <h1 class="title-logo">ECHOES OF THE LEDGER</h1>
+      <div class="title-menu">
+        <button id="btn-new-game" class="menu-btn">New Game</button>
+        <button id="btn-continue" class="menu-btn" disabled>Continue</button>
+        <button id="btn-settings" class="menu-btn">Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settings-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Settings</h2>
+      <label>
+        <input type="checkbox" id="opt-reduced-motion" />
+        Reduced Motion
+      </label>
+      <label>
+        <input type="checkbox" id="opt-subtitles" checked />
+        Subtitles
+      </label>
+      <label>
+        <input type="checkbox" id="opt-audio-only" />
+        Audio Only Mode
+      </label>
+      <label>
+        Scare Intensity:
+        <input type="range" id="opt-scare-intensity" min="0" max="100" value="80" />
+        <span id="scare-intensity-value">80%</span>
+      </label>
+      <button id="btn-close-settings" class="menu-btn">Close</button>
+    </div>
+  </div>
+
+  <div id="game-container" class="hidden">
+    <canvas id="game-canvas"></canvas>
+    <div id="hud">
+      <div id="sanity-meter">
+        <div class="meter-label">Expectation</div>
+        <div class="meter-bar">
+          <div id="sanity-fill" class="meter-fill"></div>
+        </div>
+      </div>
+      <div id="inventory-display">
+        <div class="inventory-label">Ledger Pages: <span id="page-count">0/6</span></div>
+      </div>
+      <div id="subtitle-box" class="hidden"></div>
+      <div id="interaction-hint" class="hidden">Press E to interact</div>
+    </div>
+    <div id="pause-menu" class="modal hidden">
+      <div class="modal-content">
+        <h2>Paused</h2>
+        <button id="btn-resume" class="menu-btn">Resume</button>
+        <button id="btn-main-menu" class="menu-btn">Main Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

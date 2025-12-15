@@ -1,0 +1,685 @@
+/* ==========================================
+   3D Horror Game - UI Styling
+   ========================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  background: #000;
+  color: #fff;
+  overflow: hidden;
+  cursor: crosshair;
+}
+
+/* ==========================================
+   Title Screen
+   ========================================== */
+
+#title-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #1a0000 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 1s ease-in;
+}
+
+#title-screen h1 {
+  font-size: 4rem;
+  color: #8b0000;
+  text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+  margin-bottom: 2rem;
+  animation: flicker 3s infinite alternate;
+  letter-spacing: 0.2em;
+}
+
+#title-screen .subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 3rem;
+  opacity: 0.8;
+}
+
+#title-screen button {
+  background: rgba(139, 0, 0, 0.8);
+  border: 2px solid #8b0000;
+  color: #fff;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+}
+
+#title-screen button:hover {
+  background: rgba(139, 0, 0, 1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  transform: scale(1.05);
+}
+
+/* ==========================================
+   Modals
+   ========================================== */
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 3px solid #8b0000;
+  padding: 30px;
+  min-width: 400px;
+  max-width: 600px;
+  z-index: 2000;
+  box-shadow: 0 0 30px rgba(139, 0, 0, 0.8), inset 0 0 20px rgba(139, 0, 0, 0.2);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1999;
+  backdrop-filter: blur(5px);
+}
+
+.modal h2 {
+  color: #8b0000;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+.modal p {
+  color: #ccc;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.modal button {
+  background: rgba(139, 0, 0, 0.8);
+  border: 2px solid #8b0000;
+  color: #fff;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+.modal button:hover {
+  background: rgba(139, 0, 0, 1);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+.modal .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #8b0000;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+}
+
+.modal .close-btn:hover {
+  color: #ff0000;
+  text-shadow: 0 0 10px #ff0000;
+}
+
+/* ==========================================
+   HUD (Heads-Up Display)
+   ========================================== */
+
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Health Bar */
+.health-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  pointer-events: auto;
+}
+
+.health-label {
+  color: #8b0000;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px #000;
+}
+
+.health-bar {
+  width: 200px;
+  height: 25px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #8b0000;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.health-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #8b0000 0%, #ff0000 100%);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+.health-fill.low {
+  background: linear-gradient(90deg, #600000 0%, #8b0000 100%);
+  animation: pulse 1s infinite;
+}
+
+.health-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Stamina Bar */
+.stamina-container {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  pointer-events: auto;
+}
+
+.stamina-label {
+  color: #4169e1;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  text-shadow: 0 0 5px #000;
+}
+
+.stamina-bar {
+  width: 200px;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #4169e1;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.stamina-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #1e3a8a 0%, #4169e1 100%);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 10px rgba(65, 105, 225, 0.6);
+}
+
+/* Inventory */
+.inventory {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.inventory-slot {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.inventory-slot.active {
+  border-color: #8b0000;
+  box-shadow: 0 0 15px rgba(139, 0, 0, 0.8);
+}
+
+.inventory-slot:hover {
+  border-color: #aaa;
+  transform: scale(1.1);
+}
+
+.inventory-slot .item-count {
+  position: absolute;
+  bottom: 2px;
+  right: 5px;
+  font-size: 0.8rem;
+  color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Objective Tracker */
+.objective-tracker {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #8b0000;
+  padding: 15px;
+  min-width: 250px;
+  max-width: 350px;
+  pointer-events: auto;
+}
+
+.objective-tracker h3 {
+  color: #8b0000;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-shadow: 0 0 5px #ff0000;
+}
+
+.objective-tracker ul {
+  list-style: none;
+}
+
+.objective-tracker li {
+  color: #ccc;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.objective-tracker li:before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #8b0000;
+}
+
+.objective-tracker li.completed {
+  text-decoration: line-through;
+  color: #666;
+}
+
+.objective-tracker li.completed:before {
+  content: '✓';
+  color: #0f0;
+}
+
+/* Messages/Notifications */
+.notification {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #8b0000;
+  padding: 20px 40px;
+  font-size: 1.5rem;
+  text-align: center;
+  animation: notificationFade 3s ease-in-out forwards;
+  pointer-events: none;
+  box-shadow: 0 0 20px rgba(139, 0, 0, 0.8);
+}
+
+/* Crosshair */
+.crosshair {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.crosshair:before,
+.crosshair:after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.crosshair:before {
+  width: 2px;
+  height: 20px;
+  left: 9px;
+}
+
+.crosshair:after {
+  width: 20px;
+  height: 2px;
+  top: 9px;
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 20px #ff0000, 0 0 40px #ff0000;
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+  }
+  75% {
+    opacity: 1;
+    text-shadow: 0 0 25px #ff0000, 0 0 50px #ff0000;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationFade {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* ==========================================
+   Game Over Screen
+   ========================================== */
+
+#game-over-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 3000;
+  animation: fadeIn 1s ease-in;
+}
+
+#game-over-screen.show {
+  display: flex;
+}
+
+#game-over-screen h1 {
+  font-size: 5rem;
+  color: #8b0000;
+  text-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000;
+  margin-bottom: 2rem;
+  animation: flicker 2s infinite;
+}
+
+#game-over-screen p {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 3rem;
+}
+
+/* ==========================================
+   Pause Menu
+   ========================================== */
+
+#pause-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2500;
+}
+
+#pause-menu.show {
+  display: flex;
+}
+
+#pause-menu h2 {
+  font-size: 3rem;
+  color: #8b0000;
+  text-shadow: 0 0 20px #ff0000;
+  margin-bottom: 3rem;
+}
+
+#pause-menu button {
+  background: rgba(139, 0, 0, 0.8);
+  border: 2px solid #8b0000;
+  color: #fff;
+  padding: 15px 50px;
+  font-size: 1.2rem;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  margin: 10px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  width: 250px;
+}
+
+#pause-menu button:hover {
+  background: rgba(139, 0, 0, 1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+/* ==========================================
+   Loading Screen
+   ========================================== */
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 5000;
+}
+
+.loading-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid rgba(139, 0, 0, 0.3);
+  border-top-color: #8b0000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  color: #8b0000;
+  font-size: 1.2rem;
+  animation: flicker 2s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================
+   Responsive Design
+   ========================================== */
+
+@media (max-width: 768px) {
+  #title-screen h1 {
+    font-size: 2.5rem;
+  }
+  
+  .modal {
+    min-width: 90%;
+    padding: 20px;
+  }
+  
+  .health-bar,
+  .stamina-bar {
+    width: 150px;
+  }
+  
+  .objective-tracker {
+    min-width: 200px;
+  }
+  
+  .inventory-slot {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* ==========================================
+   Utility Classes
+   ========================================== */
+
+.hidden {
+  display: none !important;
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+}
+
+/* Vignette Effect */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+  box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+}
+
+/* Damage Flash */
+.damage-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(139, 0, 0, 0.3);
+  pointer-events: none;
+  z-index: 98;
+  animation: damageFlash 0.5s;
+}
+
+@keyframes damageFlash {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
